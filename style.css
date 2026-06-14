@@ -16,7 +16,11 @@
     width: 450px;
     height: 175px;
     border-radius: 8px;
-
+    border: 2px solid #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .welcome-title {
     margin: 4px;
@@ -34,8 +38,13 @@
     font-family: 'Pixel', sans-serif;
 }
 
+.exit-icon-container {
+    left: 1000px;
+    justify-content: flex-end;
+    width: 400px;
+}
+
 .exit-icon {
-    right: 0;
     justify-self: right;
 }
 
