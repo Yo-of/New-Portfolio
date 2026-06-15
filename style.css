@@ -5,6 +5,12 @@
     font-style : normal;
 }
 
+body {
+    background-image: url('img/background.jpg');
+    background-size: cover;
+    height: 98vh;
+}
+
 .welcome {
     justify-self: center;
     display: flex;
@@ -53,4 +59,43 @@
     height : 64px;
     object-fit : cover;
     left: 0;
+}
+
+.top-bar {
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.25);
+    color: #fff;
+    font-family: 'Pixel', sans-serif;
+    gap: 32px;
+}
+
+.os {
+    margin-left: 16px;
+    font-weight: 700;
+    background-color: rgba(256, 256, 256, 0.125);
+    padding: 4px 12px;
+    border-radius: 16px;
+}
+
+.quote {
+    align-self: center;
+    margin-left: 16px;
+    font-weight: 700;
+    background-color: rgba(256, 256, 256, 0.125);
+    padding: 4px 12px;
+    border-radius: 16px;
+}
+
+.time {
+    margin-right: 16px;
+    font-weight: 700;
+    background-color: rgba(256, 256, 256, 0.125);
+    padding: 4px 12px;
+    border-radius: 16px;
 }
