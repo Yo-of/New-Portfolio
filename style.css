@@ -28,6 +28,22 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.welcome-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    cursor: grab;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.welcome-header-content {
+    margin: 0px;
+    color: #fff;
+    font-weight: 500;
+}
+
 .welcome-title {
     margin: 4px;
     padding: 4px;
@@ -42,16 +58,6 @@ body {
     text-align: left;
     width: 390px;
     font-family: 'Pixel', sans-serif;
-}
-
-.exit-icon-container {
-    left: 1000px;
-    justify-content: flex-end;
-    width: 400px;
-}
-
-.exit-icon {
-    justify-self: right;
 }
 
 .logo {

@@ -11,7 +11,7 @@ function dragElement(element) {
     var currentY = 0;
 
     if (document.getElementById(element.id + "header")) {
-        document.getElementById(element.id +"header").onmousedown = startDragging;
+        document.getElementById(element.id + "header").onmousedown = startDragging;
     } else {
         element.onmousedown = startDragging;
     }
@@ -25,4 +25,20 @@ function dragElement(element) {
         document.onmousemove = dragElement;
     }
 
+    function dragElement(e) {
+        e = e || window.event;
+        e.preventDefault();
+        currentX = initialX - e.clientX;
+        currentY = initialY - e.clientY;
+        initialX = e.clientX;
+        initialY = e.clientY;
+        element.style.top = (element.offsetTop - currentY) + "px";
+        element.style.left = (element.offsetLeft - currentX) + "px";
+    }
+
+    function stopDragging() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
 }
+
