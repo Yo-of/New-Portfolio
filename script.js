@@ -42,3 +42,22 @@ function dragElement(element) {
     }
 }
 
+var welcomeScreen = document.getElementById("welcome");
+
+function closeWindow() {
+    element.style.display = "none";
+}
+
+function openWindow() {
+    element.style.display = "flex";
+}
+
+var welcomeScreenClose = document.getElementById("welcomeclose");
+var welcomeScreenOpen = document.getElementById("welcomeopen");
+
+welcomeScreenClose.addEventListener("click", function() {
+  closeWindow(welcomeScreen);  
+})
+    welcomeScreenClose.addEventListener("click", function() {
+    closeWindow(welcomeScreen);  
+})

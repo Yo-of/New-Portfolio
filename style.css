@@ -44,6 +44,10 @@ body {
     font-weight: 500;
 }
 
+.welcome-close {
+    cursor: pointer;
+}
+
 .welcome-title {
     margin: 4px;
     padding: 4px;
