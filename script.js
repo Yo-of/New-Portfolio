@@ -10,8 +10,8 @@ function dragElement(element) {
     var currentX = 0;
     var currentY = 0;
 
-    if (document.getElementById(element.id + "header")) {
-        document.getElementById(element.id + "header").onmousedown = startDragging;
+    if (document.getElementById(element.id + "Header")) {
+        document.getElementById(element.id + "Header").onmousedown = startDragging;
     } else {
         element.onmousedown = startDragging;
     }
@@ -45,19 +45,19 @@ function dragElement(element) {
 var welcomeScreen = document.getElementById("welcome");
 
 function closeWindow() {
-    element.style.display = "none";
+    welcomeScreen.style.display = "none";
 }
 
 function openWindow() {
-    element.style.display = "flex";
+    welcomeScreen.style.display = "flex";
 }
 
-var welcomeScreenClose = document.getElementById("welcomeclose");
-var welcomeScreenOpen = document.getElementById("welcomeopen");
+var welcomeScreenClose = document.getElementById("welcomeClose");
+var welcomeScreenOpen = document.getElementById("welcomeOpen");
 
 welcomeScreenClose.addEventListener("click", function() {
   closeWindow(welcomeScreen);  
-})
-    welcomeScreenClose.addEventListener("click", function() {
-    closeWindow(welcomeScreen);  
-})
+});
+welcomeScreenOpen.addEventListener("click", function() {
+    openWindow(welcomeScreen);
+});
