@@ -44,11 +44,11 @@ function dragElement(element) {
 
 var welcomeScreen = document.getElementById("welcome");
 
-function closeWindow() {
+function closeWelcomeWindow() {
     welcomeScreen.style.display = "none";
 }
 
-function openWindow() {
+function openWelcomeWindow() {
     welcomeScreen.style.display = "flex";
 }
 
@@ -56,8 +56,51 @@ var welcomeScreenClose = document.getElementById("welcomeClose");
 var welcomeScreenOpen = document.getElementById("welcomeOpen");
 
 welcomeScreenClose.addEventListener("click", function() {
-  closeWindow(welcomeScreen);  
+  closeWelcomeWindow(welcomeScreen);  
 });
 welcomeScreenOpen.addEventListener("click", function() {
-    openWindow(welcomeScreen);
+    openWelcomeWindow(welcomeScreen);
 });
+
+var selectedIcon = undefined;
+var aboutWindowOpen = document.getElementById("aboutApp");
+var aboutWindowClose = document.getElementById("aboutClose");
+var aboutWindow = document.getElementById("about");
+
+dragElement(document.getElementById("about"));
+
+function selectIcon(element) {
+    element.classList.add("selected");
+    selectedIcon = element;
+}
+
+function deselectIcon(element) {
+    element.classList.remove("selected");
+    selectedIcon = undefined;
+}
+
+function openAboutWindow() {
+    aboutWindow.style.display = "flex";
+}
+
+function closeAboutWindow() {
+    aboutWindow.style.display = "none";
+}
+
+function handleIconClick(element) {
+    if (element.classList.contains("selected")) {
+        deselectIcon(element);
+        openAboutWindow();
+    } else {
+        selectIcon(element);
+    }
+}
+
+aboutWindowOpen.addEventListener("click", function() {
+    handleIconClick(aboutWindowOpen);
+});
+
+aboutWindowClose.addEventListener("click", function() {
+    closeAboutWindow(aboutWindow);
+});
+

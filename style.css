@@ -37,8 +37,8 @@ body {
     align-self: top;
     cursor: grab;
     justify-content: space-between;
-    margin-top: 7px;
-    margin-bottom: 4px;
+    margin-top: 9px;
+    margin-bottom: 6px;
 }
 
 .welcome-header-content {
@@ -50,15 +50,15 @@ body {
     justify-self: center;
 }
 
-.welcome-close {
+.close {
     cursor: pointer;
     width: 16px;
     height: 16px;
     background-color: #fe5f57;
     border-radius: 16px;
     margin-left: 6px;
-    left: 0;
-
+    left: 3px;
+    position: relative;
 }
 
 .welcome-content {
@@ -139,4 +139,41 @@ body {
     background-color: rgba(256, 256, 256, 0.125);
     padding: 4px 12px;
     border-radius: 16px;
+}
+
+.desktop-apps {
+    padding-top: 55px;
+    text-align: center;
+    filter: drop-shadow(0px 0px 4px black);
+    width: fit-content;
+}
+
+.app1-icon {
+    width: 90px;
+    height: 90px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.app1-name {
+    font-family: 'Pixel', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    
+    position: relative;
+
+}
+
+.selected:after {
+    content:'';
+    position: absolute;
+    background-color: rgba(64, 23, 246, 0.25);
+    top: 64px;
+    left: 0px;
+    opacity:1;
+    width: 90px;
+    height: 108px;
 }
