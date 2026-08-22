@@ -1,3 +1,5 @@
+var biggestIndex = 1;
+
 setInterval(function() {
     document.getElementById('timeElement').innerHTML = new Date().toLocaleString();
 }, 1000);
@@ -50,6 +52,8 @@ function closeWelcomeWindow() {
 
 function openWelcomeWindow() {
     welcomeScreen.style.display = "flex";
+    biggestIndex++;
+    welcomeScreen.style.zIndex = biggestIndex;
 }
 
 var welcomeScreenClose = document.getElementById("welcomeClose");
@@ -71,21 +75,25 @@ dragElement(document.getElementById("about"));
 
 function selectIcon(element) {
     element.classList.add("selected");
+    handleWindowTap(element);
     selectedIcon = element;
-}
+};
 
 function deselectIcon(element) {
     element.classList.remove("selected");
     selectedIcon = undefined;
-}
+};
 
 function openAboutWindow() {
     aboutWindow.style.display = "flex";
-}
+    aboutWindow.style.zIndex = biggestIndex;
+    topBar.style.zIndex = biggestIndex + 1;
+
+};
 
 function closeAboutWindow() {
     aboutWindow.style.display = "none";
-}
+};
 
 function handleIconClick(element) {
     if (element.classList.contains("selected")) {
@@ -94,7 +102,7 @@ function handleIconClick(element) {
     } else {
         selectIcon(element);
     }
-}
+};
 
 aboutWindowOpen.addEventListener("click", function() {
     handleIconClick(aboutWindowOpen);
@@ -104,3 +112,28 @@ aboutWindowClose.addEventListener("click", function() {
     closeAboutWindow(aboutWindow);
 });
 
+function addWindowTapHandling(element) {
+    element.addEventListener("mousedown", () =>
+    handleWindowTap(element)
+  )
+};
+
+var topBar = document.getElementById("top");
+
+function openWindow(element) {
+  element.style.display = "flex";
+  biggestIndex++;  // Increment biggestIndex by 1
+  element.style.zIndex = biggestIndex;
+  topBar.style.zIndex = biggestIndex + 1;
+}
+
+function handleWindowTap(element) {
+  biggestIndex++;  // Increment biggestIndex by 1
+  element.style.zIndex = biggestIndex;
+  topBar.style.zIndex = biggestIndex + 1;
+  deselectIcon(selectedIcon)
+}
+
+welcomeScreen.addEventListener("onclick", () =>{
+    handleWindowTap(welcomeScreen)
+})
