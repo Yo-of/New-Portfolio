@@ -12,6 +12,9 @@ function dragElement(element) {
     var currentX = 0;
     var currentY = 0;
 
+    var navbarHeight = document.querySelector('.top-bar').offsetHeight;
+
+
     if (document.getElementById(element.id + "Header")) {
         document.getElementById(element.id + "Header").onmousedown = startDragging;
     } else {
@@ -34,8 +37,24 @@ function dragElement(element) {
         currentY = initialY - e.clientY;
         initialX = e.clientX;
         initialY = e.clientY;
-        element.style.top = (element.offsetTop - currentY) + "px";
-        element.style.left = (element.offsetLeft - currentX) + "px";
+
+        var newTop = element.offsetTop - currentY;
+        var newLeft = element.offsetLeft - currentX;
+
+        var rect = element.getBoundingClientRect();
+        var offsetDiffTop = rect.top - element.offsetTop;
+        var offsetDiffLeft = rect.left - element.offsetLeft;
+
+        var maxTop = window.innerHeight - element.offsetHeight - offsetDiffTop;
+        var minTop = navbarHeight - offsetDiffTop;
+        newTop = Math.max(minTop, Math.min(newTop, maxTop));
+
+        var maxLeft = window.innerWidth - element.offsetWidth - offsetDiffLeft;
+        var minLeft = 0 - offsetDiffLeft;
+        newLeft = Math.max(minLeft, Math.min(newLeft, maxLeft));
+
+        element.style.top = newTop + "px";
+        element.style.left = newLeft + "px";
     }
 
     function stopDragging() {
@@ -46,32 +65,30 @@ function dragElement(element) {
 
 var welcomeScreen = document.getElementById("welcome");
 
-function closeWelcomeWindow() {
-    welcomeScreen.style.display = "none";
-}
-
-function openWelcomeWindow() {
-    welcomeScreen.style.display = "flex";
+function openWindow(element) {
+    element.style.display = "flex";
     biggestIndex++;
-    welcomeScreen.style.zIndex = biggestIndex;
+    element.style.zIndex = biggestIndex;
+    topBar.style.zIndex = biggestIndex + 1;
 }
 
 var welcomeScreenClose = document.getElementById("welcomeClose");
 var welcomeScreenOpen = document.getElementById("welcomeOpen");
 
-welcomeScreenClose.addEventListener("click", function() {
-  closeWelcomeWindow(welcomeScreen);  
-});
+function closeWindow(element){
+    document.getElementById(element.id + "Close").addEventListener("click", function() {
+    element.style.display = "none";
+})
+} 
+
 welcomeScreenOpen.addEventListener("click", function() {
-    openWelcomeWindow(welcomeScreen);
+    openWindow(welcomeScreen);
 });
 
 var selectedIcon = undefined;
 var aboutWindowOpen = document.getElementById("aboutApp");
 var aboutWindowClose = document.getElementById("aboutClose");
 var aboutWindow = document.getElementById("about");
-
-dragElement(document.getElementById("about"));
 
 function selectIcon(element) {
     element.classList.add("selected");
@@ -84,32 +101,17 @@ function deselectIcon(element) {
     selectedIcon = undefined;
 };
 
-function openAboutWindow() {
-    aboutWindow.style.display = "flex";
-    aboutWindow.style.zIndex = biggestIndex;
-    topBar.style.zIndex = biggestIndex + 1;
-
-};
-
-function closeAboutWindow() {
-    aboutWindow.style.display = "none";
-};
-
 function handleIconClick(element) {
     if (element.classList.contains("selected")) {
         deselectIcon(element);
-        openAboutWindow();
+        openWindow(element);
     } else {
         selectIcon(element);
-    }
+    } 
 };
 
 aboutWindowOpen.addEventListener("click", function() {
     handleIconClick(aboutWindowOpen);
-});
-
-aboutWindowClose.addEventListener("click", function() {
-    closeAboutWindow(aboutWindow);
 });
 
 function addWindowTapHandling(element) {
@@ -120,20 +122,27 @@ function addWindowTapHandling(element) {
 
 var topBar = document.getElementById("top");
 
-function openWindow(element) {
-  element.style.display = "flex";
-  biggestIndex++;  // Increment biggestIndex by 1
-  element.style.zIndex = biggestIndex;
-  topBar.style.zIndex = biggestIndex + 1;
-}
+var IndexAbout = 1;
+var IndexWelcome = 1;
 
 function handleWindowTap(element) {
-  biggestIndex++;  // Increment biggestIndex by 1
+  biggestIndex++;  
   element.style.zIndex = biggestIndex;
-  topBar.style.zIndex = biggestIndex + 1;
+  topBar.style.zIndex = biggestIndex + 2;
   deselectIcon(selectedIcon)
 }
 
-welcomeScreen.addEventListener("onclick", () =>{
-    handleWindowTap(welcomeScreen)
+function topWindow(element) {
+    element.addEventListener("mousedown", () =>{
+    handleWindowTap(element)
 })
+}
+
+function windowInteraction(element) {
+    dragElement(element);
+    closeWindow(element);
+    topWindow(element);
+}
+
+windowInteraction(welcome);
+windowInteraction(aboutWindow);

@@ -144,6 +144,7 @@ body {
     height: 90px;
     margin: 0px;
     padding: 0px;
+    z-index: 0;
 }
 
 .app1-name {
